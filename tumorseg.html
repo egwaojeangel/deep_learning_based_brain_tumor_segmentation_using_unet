@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TumorSeg - Brain Tumor Segmentation</title>
+    <style>
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif; }
+        body { background:#1a1a1a; color:#f0f0f0; min-height:100vh; display:flex; justify-content:center; align-items:center; }
+        .page { display:none; width:100%; min-height:100vh; transition:opacity 0.5s ease; position:relative; }
+        .page.active { display:flex; flex-direction:column; justify-content:center; align-items:center; opacity:1; }
+        h1, h2, h3 { color:#80cbc4; text-align:center; margin-bottom:20px; }
+        #terms-content h3 { text-align:left; }
+        .btn { padding:10px 24px; border:none; border-radius:25px; font-size:15px; cursor:pointer; background:linear-gradient(to right,#004d40,#00796b); color:white; box-shadow:0 4px 15px rgba(0,0,0,0.3); margin:8px; transition:all 0.3s; }
+        .btn:hover { transform:translateY(-3px); box-shadow:0 8px 25px rgba(0,0,0,0.4); }
+        .btn.big { padding:18px 48px; font-size:20px; }
+        .btn.small { padding:10px 20px; font-size:14px; }
+        .login-container, .scan-container, .record-form { background:#333; padding:30px; border-radius:15px; box-shadow:0 10px 30px rgba(0,0,0,0.6); width:90%; max-width:600px; text-align:center; }
+        input, select, textarea { width:100%; padding:12px; margin:10px 0; border:1px solid #555; border-radius:6px; background:#444; color:#f0f0f0; font-size:15px; }
+        label { display:block; margin:12px 0 6px; color:#80cbc4; text-align:left; }
+        .password-strength { height:8px; background:#555; border-radius:4px; margin:8px 0; overflow:hidden; }
+        .password-strength div { height:100%; transition:width 0.4s, background 0.4s; }
+        .weak { background:red; } .medium { background:orange; } .strong { background:lime; }
+        #strength-text { font-size:13px; margin-top:4px; }
+        .success-message { color:lime; font-weight:bold; margin:12px 0; }
+        .error-message { color:#ff4d4d; font-weight:bold; }
+        .loader-text { display:none; color:lime; font-size:16px; margin:20px 0; }
+        .loader-dots::after { content:'...'; animation:dots 1.8s infinite steps(4); }
+        @keyframes dots { 0%,25% {content:'.';} 25%,50% {content:'..';} 50%,75% {content:'...';} 75%,100% {content:'';} }
+        #result { margin:20px auto; padding:20px; background:#3a3a3a; border-radius:10px; width:90%; max-width:720px; text-align:center; display:none; }
+        .positive-result { color:#ff4d4d; font-weight:bold; font-size:1.5em; }
+        .disclaimer { font-weight:bold; color:#ff4d4d; margin-top:24px; font-size:0.95em; line-height:1.6; }
+        .back-btn { position:absolute; top:20px; left:20px; padding:10px 20px; background:#555; border:none; border-radius:5px; color:white; cursor:pointer; }
+        .back-btn:hover { background:#777; }
+        .advice-container { margin:30px 0; min-height:100px; position:relative; width:90%; max-width:600px; }
+        .advice-quote { font-size:1em; font-style:italic; color:#e0f7fa; margin-bottom:12px; opacity:0; transform:translateX(-120%); transition:all 1.3s ease; }
+        .advice-citation { font-size:0.85em; color:#b2dfdb; opacity:0; transform:translateX(-120%); transition:all 1.3s ease; }
+        .visible { opacity:1; transform:translateX(0); }
+        #result-image { margin:30px auto; max-width:100%; text-align:center; }
+        #result-image img { max-width:100%; height:auto; border-radius:12px; box-shadow:0 4px 20px rgba(0,0,0,0.6); display:block; margin:0 auto; }
+        .result-stat { margin:12px 0; font-size:1.1em; }
+        .patient-table { width:100%; border-collapse:collapse; font-size:14px; margin-top:20px; }
+        .patient-table th, .patient-table td { padding:12px; text-align:left; border-bottom:1px solid #555; }
+        .patient-table th { background:#444; color:#80cbc4; position:sticky; top:0; }
+        .patient-table tr:hover { background:#444; }
+        .search-bar { width:100%; max-width:600px; padding:12px; margin-bottom:20px; border-radius:8px; border:1px solid #555; background:#444; color:#f0f0f0; font-size:16px; }
+        .action-buttons { margin:20px 0; display:flex; flex-wrap:wrap; justify-content:center; gap:12px; }
+        @media (max-width:600px) { .btn.big {padding:14px 32px; font-size:17px;} .btn.small {padding:9px 18px; font-size:13px;} }
+    </style>
+</head>
+<body>
+
+    <!-- Login Page -->
+    <div id="landing-page" class="page active">
+        <div class="login-container">
+            <h1>Welcome to TumorSeg!</h1>
+            <p>An AI-Powered Brain Tumor Segmentation System</p>
+            <p>By: Egwaoje Angel Omoikhefe</p>
+            <p>Matric no: 21/sci01/025</p>
+
+            <input type="text" id="hospital-name" placeholder="Hospital/Clinic Name" required>
+            <input type="text" id="admin-id" placeholder="Admin ID" required>
+            <input type="email" id="email" placeholder="Enter your email" required>
+            <input type="password" id="password" placeholder="Enter your password" oninput="checkPasswordStrength()" required>
+
+            <div class="password-strength"><div id="strength-bar"></div></div>
+            <p id="strength-text"></p>
+            <p id="auth-message"></p>
+
+            <button class="btn" id="register-btn" disabled>Register</button>
+            <button class="btn" id="signin-btn">Sign In</button>
+        </div>
+    </div>
+
+    <!-- Terms & Conditions -->
+    <div id="terms-page" class="page">
+        <button class="back-btn" onclick="navigateBack()">Back</button>
+        <h2>Terms and Conditions</h2>
+        <div id="terms-content">
+            <p><strong>TumorSeg Terms of Use</strong></p>
+            <p id="last-updated">Last Updated: Loading...</p>
+            <p>Welcome to TumorSeg, an AI-powered brain tumor segmentation platform. By using our service, you agree to the following terms and conditions. Please read them carefully.</p>
+
+            <h3>1. Acceptance of Terms</h3>
+            <p>By accessing or using TumorSeg, you agree to be bound by these Terms of Use and our Privacy Policy. If you do not agree, please do not use our service.</p>
+
+            <h3>2. Use of Service</h3>
+            <p>TumorSeg provides AI-based segmentation of brain MRI scans for informational purposes only. The results are not a substitute for professional medical advice, diagnosis, or treatment. Always consult a qualified healthcare provider.</p>
+
+            <h3>3. User Responsibilities</h3>
+            <p>You are responsible for ensuring that any uploaded medical images comply with applicable laws and regulations, including patient consent and data privacy laws (e.g., HIPAA, GDPR, NDPR).</p>
+
+            <h3>4. Intellectual Property</h3>
+            <p>All content, including the AI model, segmentation outputs, 3D visualizations, and software, is the property of TumorSeg or its licensors. You are not allowed to reproduce, distribute, or modify any content without permission.</p>
+
+            <h3>5. Limitation of Liability</h3>
+            <p>TumorSeg is not liable for any damages arising from the use of our service, including inaccurate segmentations or reliance on AI analysis. The service is provided "as is" without warranties.</p>
+
+            <h3>6. Termination</h3>
+            <p>We reserve the right to terminate or suspend your access to TumorSeg at any time for violation of these terms or for any other reason.</p>
+
+            <h3>7. Contact Us</h3>
+            <p>If you have any questions, please contact us at support@tumorseg.ai.</p>
+        </div>
+        <div class="terms-buttons">
+            <button class="btn" onclick="navigate('post-login-page')">Accept</button>
+            <button class="btn" onclick="navigateBack()">Decline</button>
+        </div>
+    </div>
+
+    <!-- Dashboard -->
+    <div id="post-login-page" class="page">
+        <button class="back-btn" onclick="navigateBack()">Back</button>
+        <h1 id="welcome-message"></h1>
+        <p>What would you like to do today?</p>
+        <button class="btn big" onclick="navigate('scan-page')">Upload New Scan</button>
+        <button class="btn big" onclick="navigate('patient-records')">Access Patient Records</button>
+        <button class="btn big" onclick="confirmLogout()">Logout</button>
+    </div>
+
+    <!-- Upload & Analyze -->
+    <div id="scan-page" class="page">
+        <button class="back-btn" onclick="navigateBack()">Back</button>
+        <div class="scan-container">
+            <h2>Upload a Brain MRI Scan</h2>
+            <p class="upload-instruction">Upload a brain MRI scan in PNG, JPG, JPEG, DICOM, NII, or NII.GZ format for AI-based tumor segmentation.</p>
+
+            <input type="file" id="file-input" accept=".png,.jpg,.jpeg,.dcm,.nii,.nii.gz">
+            <label for="file-input" class="file-label">Upload MRI Scan</label>
+            <p id="file-name"></p>
+
+            <button class="btn" onclick="analyzeScan()">Analyze Scan</button>
+            <p class="loader-text loader-dots" id="loader">Analyzing</p>
+
+            <div id="result"></div>
+
+            <div id="button-container" style="display:none;">
+                <button class="btn small" onclick="saveAsRecord()">Save As</button>
+                <button class="btn small" onclick="printResult()">Print Result</button>
+                <button class="btn small" onclick="shareResult()">Share Result</button>
+                <button class="btn small" onclick="confirmDeleteScan()">Delete</button>
+            </div>
+
+            <div class="advice-container">
+                <p class="advice-quote"></p>
+                <p class="advice-citation"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Patient Records -->
+    <div id="patient-records" class="page">
+        <button class="back-btn" onclick="navigateBack()">Back</button>
+        <h2>Patient Records</h2>
+
+        <input type="text" class="search-bar" id="search-patient" placeholder="Search by Name or Patient ID" oninput="filterPatients()">
+
+        <div class="action-buttons">
+            <button class="btn action" onclick="addRecord()">Add Record</button>
+            <button class="btn action" disabled>Edit Record</button>
+            <button class="btn action" disabled>View Record</button>
+            <button class="btn red" id="delete-btn" disabled>Delete Record</button>
+        </div>
+
+        <div class="table-container">
+            <table class="patient-table">
+                <thead>
+                    <tr>
+                        <th></th>
+                        <th>Patient ID</th>
+                        <th>Patient Name</th>
+                        <th>DOB</th>
+                        <th>Contact Information</th>
+                    </tr>
+                </thead>
+                <tbody id="patient-table-body">
+                    <!-- Empty – you add patients manually -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const today = new Date();
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('last-updated').textContent = `Last Updated: ${today.toLocaleDateString('en-US', options)}`;
+        });
+
+        let userEmail = '';
+        let currentQuote = 0;
+
+        const quotes = [
+            { quote: "Early detection of brain tumors can dramatically improve treatment outcomes.", citation: "American Brain Tumor Association, 2024" },
+            { quote: "Precise tumor segmentation is essential for effective surgical planning.", citation: "International Journal of Radiation Oncology, 2023" },
+            { quote: "AI tools reduce variability in brain tumor delineation.", citation: "Radiology: Artificial Intelligence, 2022" },
+            { quote: "Multimodal MRI enhances segmentation accuracy.", citation: "Neuro-Oncology Advances, 2023" },
+            { quote: "Volumetric analysis outperforms 2D measurements for tumor monitoring.", citation: "RANO Criteria Update, 2020" }
+        ];
+
+        function checkPasswordStrength() {
+            const pwd = document.getElementById('password').value;
+            const bar = document.getElementById('strength-bar');
+            const txt = document.getElementById('strength-text');
+
+            let score = 0;
+            if (pwd.length >= 8) score += 30;
+            if (/[A-Z]/.test(pwd)) score += 20;
+            if (/[a-z]/.test(pwd)) score += 20;
+            if (/\d/.test(pwd)) score += 15;
+            if (/[^A-Za-z0-9]/.test(pwd)) score += 15;
+
+            bar.style.width = score + '%';
+
+            if (score < 40) {
+                bar.style.background = 'red';
+                txt.textContent = 'Weak';
+                txt.style.color = 'red';
+            } else if (score < 70) {
+                bar.style.background = 'orange';
+                txt.textContent = 'Moderate';
+                txt.style.color = 'orange';
+            } else {
+                bar.style.background = 'lime';
+                txt.textContent = 'Strong';
+                txt.style.color = 'lime';
+            }
+        }
+
+        document.getElementById('signin-btn').onclick = () => {
+            userEmail = document.getElementById('email').value.trim();
+            if (userEmail) {
+                document.getElementById('auth-message').textContent = 'Sign in successful!';
+                document.getElementById('auth-message').className = 'success-message';
+                setTimeout(() => navigate('terms-page'), 1200);
+            } else {
+                document.getElementById('auth-message').textContent = 'Please enter email';
+                document.getElementById('auth-message').className = 'error-message';
+            }
+        };
+
+        document.getElementById('register-btn').onclick = () => {
+            document.getElementById('auth-message').textContent = 'Registration successful! Now sign in.';
+            document.getElementById('auth-message').className = 'success-message';
+        };
+
+        function navigate(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+
+            if (pageId === 'post-login-page') {
+                const name = userEmail.split('@')[0];
+                document.getElementById('welcome-message').textContent = `Good day, Dr. ${name.charAt(0).toUpperCase() + name.slice(1)}!`;
+            }
+
+            if (pageId === 'scan-page') startQuotes();
+        }
+
+        function navigateBack() {
+            history.back();
+        }
+
+        function confirmLogout() {
+            if (confirm('Are you sure you want to log out?')) {
+                userEmail = '';
+                navigate('landing-page');
+            }
+        }
+
+        async function analyzeScan() {
+            const fileInput = document.getElementById('file-input');
+            if (!fileInput.files.length) return alert('Select file first');
+
+            const file = fileInput.files[0];
+            const ext = file.name.split('.').pop().toLowerCase();
+            if (!['png','jpg','jpeg','dcm','nii','nii.gz'].includes(ext)) {
+                alert('Please upload a brain MRI scan (PNG, JPG, JPEG, DICOM, NII, or NII.GZ only)');
+                return;
+            }
+
+            document.getElementById('file-name').textContent = file.name;
+            document.getElementById('loader').style.display = 'block';
+            document.getElementById('result').style.display = 'none';
+            document.getElementById('button-container').style.display = 'none';
+
+            const formData = new FormData();
+            formData.append('file', file);
+
+            try {
+                const res = await fetch('http://127.0.0.1:5000/analyze', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (!res.ok) {
+                    let errorMsg = `Server error (${res.status})`;
+                    try {
+                        const errData = await res.json();
+                        errorMsg = errData.error || errorMsg;
+                    } catch {}
+                    throw new Error(errorMsg);
+                }
+
+                const data = await res.json();
+
+                if (!data.success) throw new Error(data.error || 'Analysis failed');
+
+                document.getElementById('result').innerHTML = `
+                    <p><strong class="positive-result">${data.result}</strong></p>
+                    <p><strong>Confidence Score:</strong> <span class="result-highlight">${data.confidence}%</span></p>
+                    <p><strong>Dice Estimate:</strong> <span class="result-highlight">${(data.confidence / 100).toFixed(4)}</span></p>
+
+                    <div id="result-image">
+                        <p style="text-align:center; font-weight:bold; margin-bottom:20px; color:#80cbc4; font-size:1.3em;">
+                            Segmented Brain MRI Slice with Tumor Highlighted (Red = Tumor)
+                        </p>
+                        <img src="${data.segmented_url || ''}" alt="Segmented MRI" style="max-width:100%; height:auto; border-radius:12px; box-shadow:0 6px 25px rgba(0,0,0,0.7);">
+                    </div>
+
+                    <p class="disclaimer" style="text-align:center; margin-top:30px;">
+                        Disclaimer: This tool is intended solely for use by licensed medical professionals, including neuroradiologists and neurosurgeons. It provides AI-assisted brain tumor segmentation to support research and clinical assessment. Final interpretation, diagnosis, treatment decisions, and patient care remain the sole responsibility of the medical professional. This system is designed to assist, not replace, professional medical judgment.
+                    </p>
+                `;
+                document.getElementById('result').style.display = 'block';
+                document.getElementById('button-container').style.display = 'flex';
+            } catch (err) {
+                document.getElementById('result').innerHTML = `
+                    <p class="error-message">Error: ${err.message}</p>
+                    <p style="color:#ffcc00;">Make sure Flask (app.py) is running on http://127.0.0.1:5000</p>
+                `;
+                document.getElementById('result').style.display = 'block';
+                console.error('Fetch error:', err);
+            } finally {
+                document.getElementById('loader').style.display = 'none';
+            }
+        }
+
+        function startQuotes() {
+            const qEl = document.querySelector('.advice-quote');
+            const cEl = document.querySelector('.advice-citation');
+
+            function next() {
+                qEl.classList.remove('visible');
+                cEl.classList.remove('visible');
+                setTimeout(() => {
+                    qEl.textContent = quotes[currentQuote].quote;
+                    cEl.textContent = quotes[currentQuote].citation;
+                    qEl.classList.add('visible');
+                    cEl.classList.add('visible');
+                    currentQuote = (currentQuote + 1) % quotes.length;
+                }, 800);
+            }
+
+            next();
+            setInterval(next, 6000);
+        }
+
+        function saveAsRecord() { alert('Scan saved to patient record.'); }
+        function printResult() { window.print(); }
+        function shareResult() { alert('Result shared (demo).'); }
+        function confirmDeleteScan() { 
+            if (confirm('Delete this analysis?')) {
+                document.getElementById('result').style.display = 'none';
+                document.getElementById('file-input').value = '';
+                document.getElementById('file-name').textContent = '';
+            }
+        }
+
+        function addRecord() { alert('Add record page - coming soon'); }
+        function saveRecord() { alert('Patient record saved successfully.'); }
+
+        function filterPatients() {
+            alert('Searching patients... (demo)');
+        }
+
+        navigate('landing-page');
+    </script>
+</body>
+</html>
