@@ -15,8 +15,11 @@
         .btn:hover { transform:translateY(-3px); box-shadow:0 8px 25px rgba(0,0,0,0.4); }
         .btn.big { padding:18px 48px; font-size:20px; }
         .btn.small { padding:10px 20px; font-size:14px; }
-        .login-container, .scan-container, .record-form { background:#333; padding:30px; border-radius:15px; box-shadow:0 10px 30px rgba(0,0,0,0.6); width:90%; max-width:600px; text-align:center; }
+        .btn.save { background:linear-gradient(to right,#2e7d32,#4caf50); }
+        .btn.red { background:linear-gradient(to right,#b71c1c,#f44336); }
+        .login-container, .scan-container, .record-form { background:#333; padding:40px; border-radius:15px; box-shadow:0 10px 30px rgba(0,0,0,0.6); width:95%; max-width:900px; text-align:center; }
         input, select, textarea { width:100%; padding:12px; margin:10px 0; border:1px solid #555; border-radius:6px; background:#444; color:#f0f0f0; font-size:15px; }
+        input[readonly], textarea[readonly] { background:#2a2a2a !important; color:#aaa !important; cursor:not-allowed; }
         label { display:block; margin:12px 0 6px; color:#80cbc4; text-align:left; }
         .password-strength { height:8px; background:#555; border-radius:4px; margin:8px 0; overflow:hidden; }
         .password-strength div { height:100%; transition:width 0.4s, background 0.4s; }
@@ -27,12 +30,12 @@
         .loader-text { display:none; color:lime; font-size:16px; margin:20px 0; }
         .loader-dots::after { content:'...'; animation:dots 1.8s infinite steps(4); }
         @keyframes dots { 0%,25% {content:'.';} 25%,50% {content:'..';} 50%,75% {content:'...';} 75%,100% {content:'';} }
-        #result { margin:20px auto; padding:20px; background:#3a3a3a; border-radius:10px; width:90%; max-width:720px; text-align:center; display:none; }
+        #result { margin:20px auto; padding:20px; background:#3a3a3a; border-radius:10px; width:95%; max-width:1000px; text-align:center; display:none; }
         .positive-result { color:#ff4d4d; font-weight:bold; font-size:1.5em; }
-        .disclaimer { font-weight:bold; color:#ff4d4d; margin-top:24px; font-size:0.95em; line-height:1.6; }
+        .disclaimer { font-weight:bold; color:#ff4d4d; margin-top:24px; font-size:0.95em; line-height:1.6; text-align:left; }
         .back-btn { position:absolute; top:20px; left:20px; padding:10px 20px; background:#555; border:none; border-radius:5px; color:white; cursor:pointer; }
         .back-btn:hover { background:#777; }
-        .advice-container { margin:30px 0; min-height:100px; position:relative; width:90%; max-width:600px; }
+        .advice-container { margin:30px 0; min-height:100px; position:relative; width:95%; max-width:900px; }
         .advice-quote { font-size:1em; font-style:italic; color:#e0f7fa; margin-bottom:12px; opacity:0; transform:translateX(-120%); transition:all 1.3s ease; }
         .advice-citation { font-size:0.85em; color:#b2dfdb; opacity:0; transform:translateX(-120%); transition:all 1.3s ease; }
         .visible { opacity:1; transform:translateX(0); }
@@ -43,9 +46,105 @@
         .patient-table th, .patient-table td { padding:12px; text-align:left; border-bottom:1px solid #555; }
         .patient-table th { background:#444; color:#80cbc4; position:sticky; top:0; }
         .patient-table tr:hover { background:#444; }
-        .search-bar { width:100%; max-width:600px; padding:12px; margin-bottom:20px; border-radius:8px; border:1px solid #555; background:#444; color:#f0f0f0; font-size:16px; }
+        .search-bar { width:100%; max-width:800px; padding:12px; margin-bottom:20px; border-radius:8px; border:1px solid #555; background:#444; color:#f0f0f0; font-size:16px; }
         .action-buttons { margin:20px 0; display:flex; flex-wrap:wrap; justify-content:center; gap:12px; }
-        @media (max-width:600px) { .btn.big {padding:14px 32px; font-size:17px;} .btn.small {padding:9px 18px; font-size:13px;} }
+        .form-group { margin-bottom:18px; }
+        .form-title { color:#80cbc4; font-size:1.3em; margin:20px 0 10px; text-align:center; }
+        a { color:#80cbc4; text-decoration:none; }
+        a:hover { text-decoration:underline; }
+        .passport-container { 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            margin: 20px 0; 
+        }
+        #passport-preview { 
+            width: 80px; 
+            height: 80px; 
+            object-fit: cover; 
+            border-radius: 8px; 
+            border: 2px solid #555; 
+            display: none; 
+        }
+        .delete-passport-btn { 
+            background:#e74c3c; 
+            color:white; 
+            border:none; 
+            padding:8px 16px; 
+            border-radius:8px; 
+            cursor:pointer; 
+            font-size:14px; 
+            margin-top:12px; 
+            display:none; 
+        }
+        .delete-passport-btn:hover { background:#c0392b; }
+        .patient-detail { background:#f5f5f5; color:#333; padding:30px; border-radius:12px; margin:20px auto; width:95%; max-width:1000px; text-align:left; }
+        .patient-detail h4 { 
+            color:#80cbc4; 
+            margin-bottom:15px; 
+            text-align:center; 
+        }
+        .patient-detail p { margin-bottom:10px; font-size:1.05em; }
+        .patient-detail img { max-width:180px; border-radius:12px; float:left; margin-right:30px; margin-bottom:25px; border:3px solid #ddd; }
+        .view-docs, .view-segmentation { 
+            background:#80cbc4; 
+            color:white; 
+            padding:12px 24px; 
+            border-radius:8px; 
+            display:inline-block; 
+            margin:15px 0; 
+            text-align:center; 
+            font-weight:bold; 
+            cursor:pointer; 
+        }
+        .detail-section { background:#fff3e0; padding:20px; border-radius:10px; margin-bottom:20px; }
+        .table-container { width:95%; max-width:1200px; overflow-x:auto; }
+
+        /* Modal Styles */
+        #segmentation-modal {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.88);
+            z-index: 9999;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            color: #fff;
+        }
+        .modal-content {
+            background: #222;
+            padding: 30px;
+            border-radius: 16px;
+            max-width: 92%;
+            max-height: 92vh;
+            overflow-y: auto;
+            position: relative;
+            box-shadow: 0 0 50px rgba(0,0,0,0.9);
+        }
+        .modal-close {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 38px;
+            height: 38px;
+            font-size: 24px;
+            cursor: pointer;
+            line-height: 38px;
+            text-align: center;
+        }
+        .modal-close:hover { background: #c0392b; }
+        @media (max-width:600px) { 
+            .btn.big {padding:14px 32px; font-size:17px;} 
+            .btn.small {padding:9px 18px; font-size:13px;}
+            .record-form, .patient-detail { padding:25px; }
+            .modal-content { padding:20px; }
+        }
     </style>
 </head>
 <body>
@@ -56,10 +155,10 @@
             <h1>Welcome to TumorSeg!</h1>
             <p>An AI-Powered Brain Tumor Segmentation System</p>
             <p>By: Egwaoje Angel Omoikhefe</p>
-            <p>Matric no: 21/sci01/025</p>
 
             <input type="text" id="hospital-name" placeholder="Hospital/Clinic Name" required>
             <input type="text" id="admin-id" placeholder="Admin ID" required>
+            <input type="text" id="first-name" placeholder="Enter your first name" required>
             <input type="email" id="email" placeholder="Enter your email" required>
             <input type="password" id="password" placeholder="Enter your password" oninput="checkPasswordStrength()" required>
 
@@ -135,7 +234,7 @@
             <div id="result"></div>
 
             <div id="button-container" style="display:none;">
-                <button class="btn small" onclick="saveAsRecord()">Save As</button>
+                <button class="btn small" onclick="saveScanAsRecord()">Save As</button>
                 <button class="btn small" onclick="printResult()">Print Result</button>
                 <button class="btn small" onclick="shareResult()">Share Result</button>
                 <button class="btn small" onclick="confirmDeleteScan()">Delete</button>
@@ -145,6 +244,8 @@
                 <p class="advice-quote"></p>
                 <p class="advice-citation"></p>
             </div>
+
+            <p class="disclaimer">Disclaimer: This tool is intended solely for use by licensed medical professionals, including neuroradiologists and neurosurgeons. It provides AI-assisted brain tumor segmentation to support research and clinical assessment. Final interpretation, diagnosis, treatment decisions, and patient care remain the sole responsibility of the medical professional. This system is designed to assist, not replace, professional medical judgment.</p>
         </div>
     </div>
 
@@ -156,10 +257,10 @@
         <input type="text" class="search-bar" id="search-patient" placeholder="Search by Name or Patient ID" oninput="filterPatients()">
 
         <div class="action-buttons">
-            <button class="btn action" onclick="addRecord()">Add Record</button>
-            <button class="btn action" disabled>Edit Record</button>
-            <button class="btn action" disabled>View Record</button>
-            <button class="btn red" id="delete-btn" disabled>Delete Record</button>
+            <button class="btn" onclick="navigateToFreshAddPage()">Add Record</button>
+            <button class="btn" onclick="editSelectedPatient()">Edit Record</button>
+            <button class="btn" onclick="viewSelectedPatient()">View Record</button>
+            <button class="btn red" onclick="deleteSelectedPatient()">Delete Record</button>
         </div>
 
         <div class="table-container">
@@ -168,35 +269,236 @@
                     <tr>
                         <th></th>
                         <th>Patient ID</th>
-                        <th>Patient Name</th>
+                        <th>Full Name</th>
                         <th>DOB</th>
                         <th>Contact Information</th>
+                        <th>Scans</th>
                     </tr>
                 </thead>
-                <tbody id="patient-table-body">
-                    <!-- Empty – you add patients manually -->
-                </tbody>
+                <tbody id="patient-table-body"></tbody>
             </table>
         </div>
     </div>
 
-    <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            const today = new Date();
-            const options = { year: 'numeric', month: 'long', day: 'numeric' };
-            document.getElementById('last-updated').textContent = `Last Updated: ${today.toLocaleDateString('en-US', options)}`;
-        });
+    <!-- Add / Edit Patient Record Page -->
+    <div id="add-patient-page" class="page">
+        <button class="back-btn" onclick="navigateBack()">Back</button>
+        <div class="record-form">
+            <h2 id="form-title">Add Patient Record</h2>
 
+            <div class="form-title">Patient Identification and Demographics</div>
+
+            <div class="form-group">
+                <label>Passport Upload</label>
+                <div class="passport-container">
+                    <input type="file" id="passport-upload" accept="image/*" onchange="previewPassport()">
+                    <p id="passport-name" style="font-size:0.9em; color:#aaa; margin:8px 0;">No file chosen</p>
+                    <img id="passport-preview" src="" alt="Passport Preview">
+                    <button type="button" class="delete-passport-btn" id="clear-passport" onclick="clearPassport()">
+                        🗑 Delete Passport
+                    </button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label>Patient ID <span style="color:#ff4d4d;">*</span></label>
+                <input type="text" id="patient-id" placeholder="e.g., Tumor-3456" required>
+            </div>
+
+            <div class="form-group">
+                <label>Full Name</label>
+                <input type="text" id="full-name" placeholder="e.g., Mrs CHIOMA">
+            </div>
+
+            <div class="form-group">
+                <label>Date of Birth</label>
+                <input type="text" id="dob" placeholder="e.g., 23/07/1953">
+            </div>
+
+            <div class="form-group">
+                <label>Gender</label>
+                <select id="gender">
+                    <option value="">Select Gender</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+
+            <div class="form-title">Contact Information</div>
+
+            <div class="form-group">
+                <label>Phone Number</label>
+                <input type="tel" id="phone" placeholder="e.g., +234 812 345 6789">
+            </div>
+
+            <div class="form-group">
+                <label>Address</label>
+                <textarea id="address" rows="2" placeholder="e.g., 123 Main St, Lagos"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Emergency Contact</label>
+                <input type="text" id="emergency-contact" placeholder="e.g., John Doe, +234 803 456 7890">
+            </div>
+
+            <div class="form-title">Insurance Information</div>
+
+            <div class="form-group">
+                <label>Insurance Policy</label>
+                <input type="text" id="insurance" placeholder="e.g., Policy #12345">
+            </div>
+
+            <div class="form-group">
+                <label>Assigned Doctor</label>
+                <input type="text" id="doctor" placeholder="e.g., Dr. Lisa Danjuma">
+            </div>
+
+            <div class="form-title">Medical History</div>
+
+            <div class="form-group">
+                <label>Family History</label>
+                <textarea id="family-history-brain" rows="2" placeholder="e.g., Mother with glioma"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Symptoms</label>
+                <textarea id="symptoms" rows="2" placeholder="e.g., Headaches, seizures, vision changes"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Previous Conditions</label>
+                <textarea id="previous-conditions" rows="2" placeholder="e.g., Migraines, epilepsy"></textarea>
+            </div>
+
+            <div class="form-group">
+                <label>Current Medications</label>
+                <textarea id="current-medications" rows="2" placeholder="e.g., Levetiracetam"></textarea>
+            </div>
+
+            <div class="form-title">Tumor Details (AI Results - Uneditable)</div>
+
+            <div class="form-group">
+                <label>Tumor Segmented by AI Model</label>
+                <input type="text" id="tumor-segmented-by-ai" readonly placeholder="Auto-filled from scan">
+            </div>
+
+            <div class="form-group">
+                <label>Tumor Size</label>
+                <input type="text" id="tumor-size" readonly placeholder="Auto-filled from scan">
+            </div>
+
+            <div class="form-group">
+                <label>Tumor Type</label>
+                <input type="text" id="tumor-type" readonly placeholder="Auto-filled from scan">
+            </div>
+
+            <div class="form-group">
+                <label>Tumor Location</label>
+                <input type="text" id="tumor-location" readonly placeholder="Auto-filled from scan">
+            </div>
+
+            <div class="form-group">
+                <label>Tumor Grade</label>
+                <input type="text" id="tumor-grade" readonly placeholder="Auto-filled from scan">
+            </div>
+
+            <div class="form-title">Histology</div>
+
+            <div class="form-group">
+                <label>Biopsy Result</label>
+                <input type="text" id="biopsy-result" placeholder="e.g., Positive for Glioma">
+            </div>
+
+            <div class="form-group">
+                <label>Histology Type</label>
+                <input type="text" id="histology" placeholder="e.g., Anaplastic Astrocytoma">
+            </div>
+
+            <div class="form-title">Treatment Plan</div>
+
+            <div class="form-group">
+                <label>Diagnosis Date</label>
+                <input type="text" id="diagnosis-date" placeholder="e.g., 2025-05-04">
+            </div>
+
+            <div class="form-group">
+                <label>Treatment Type</label>
+                <input type="text" id="treatment-type" placeholder="e.g., Radiation Therapy">
+            </div>
+
+            <div class="form-group">
+                <label>Treatment Start</label>
+                <input type="text" id="treatment-start" placeholder="e.g., 2025-05-07">
+            </div>
+
+            <div class="form-group">
+                <label>Response to Treatment</label>
+                <textarea id="response-to-treatment" rows="2" placeholder="e.g., Responding well to treatment"></textarea>
+            </div>
+
+            <button class="btn save big" onclick="savePatientRecord()">Save Patient Record</button>
+        </div>
+    </div>
+
+    <!-- View Patient Record Page -->
+    <div id="view-patient-page" class="page">
+        <button class="back-btn" onclick="navigateBack()">Back</button>
+        <div class="record-form">
+            <h2>Patient Record</h2>
+
+            <div class="patient-detail" id="view-patient-detail"></div>
+        </div>
+    </div>
+
+    <!-- Segmentation Modal -->
+    <div id="segmentation-modal">
+        <div class="modal-content">
+            <button class="modal-close" onclick="document.getElementById('segmentation-modal').style.display='none'">×</button>
+            
+            <h2 style="color:#80cbc4; margin-bottom:25px; text-align:center;">AI-Segmented MRI Result</h2>
+
+            <div id="modal-segmented-image" style="text-align:center; margin:30px 0;"></div>
+
+            <div style="margin:25px 0; padding:20px; background:#333; border-radius:12px;">
+                <h3 style="color:#80cbc4; margin-bottom:18px; text-align:center;">AI-Generated Findings</h3>
+                <p id="modal-confidence" style="margin:12px 0; font-size:1.1em;"></p>
+                <p id="modal-tumor-size" style="margin:12px 0; font-size:1.1em;"></p>
+                <p id="modal-tumor-type" style="margin:12px 0; font-size:1.1em;"></p>
+                <p id="modal-tumor-location" style="margin:12px 0; font-size:1.1em;"></p>
+                <p id="modal-tumor-grade" style="margin:12px 0; font-size:1.1em;"></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
         let userEmail = '';
+        let userFirstName = '';
         let currentQuote = 0;
+        let currentEditId = null;
+        let currentViewedId = null;
+        let lastAnalyzedPatientId = null;
+        let lastAnalysisResult = null;
 
         const quotes = [
             { quote: "Early detection of brain tumors can dramatically improve treatment outcomes.", citation: "American Brain Tumor Association, 2024" },
             { quote: "Precise tumor segmentation is essential for effective surgical planning.", citation: "International Journal of Radiation Oncology, 2023" },
             { quote: "AI tools reduce variability in brain tumor delineation.", citation: "Radiology: Artificial Intelligence, 2022" },
             { quote: "Multimodal MRI enhances segmentation accuracy.", citation: "Neuro-Oncology Advances, 2023" },
-            { quote: "Volumetric analysis outperforms 2D measurements for tumor monitoring.", citation: "RANO Criteria Update, 2020" }
+            { quote: "Volumetric analysis outperforms 2D measurements for tumor monitoring.", citation: "RANO Criteria Update, 2020" },
+            { quote: "Deep learning models achieve near-radiologist performance in glioma segmentation.", citation: "Nature Machine Intelligence, 2021" },
+            { quote: "Automated segmentation reduces inter-observer variability in clinical trials.", citation: "The Lancet Oncology, 2022" },
+            { quote: "AI-assisted delineation shortens treatment planning time by up to 70%.", citation: "Journal of Neuro-Oncology, 2024" },
+            { quote: "Accurate tumor boundary detection is critical for radiation dose optimization.", citation: "International Journal of Radiation Oncology • Biology • Physics, 2023" },
+            { quote: "Federated learning enables privacy-preserving brain tumor segmentation across hospitals.", citation: "Medical Image Analysis, 2025" },
+            { quote: "3D U-Net variants remain the gold standard for multimodal brain tumor segmentation.", citation: "MICCAI BraTS Challenge Report, 2024" }
         ];
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const today = new Date();
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('last-updated').textContent = `Last Updated: ${today.toLocaleDateString('en-US', options)}`;
+        });
 
         function checkPasswordStrength() {
             const pwd = document.getElementById('password').value;
@@ -229,6 +531,7 @@
 
         document.getElementById('signin-btn').onclick = () => {
             userEmail = document.getElementById('email').value.trim();
+            userFirstName = document.getElementById('first-name').value.trim() || 'Doctor';
             if (userEmail) {
                 document.getElementById('auth-message').textContent = 'Sign in successful!';
                 document.getElementById('auth-message').className = 'success-message';
@@ -246,14 +549,96 @@
 
         function navigate(pageId) {
             document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById(pageId).classList.add('active');
+            const targetPage = document.getElementById(pageId);
+            if (targetPage) {
+                targetPage.classList.add('active');
+            } else {
+                console.error(`Page with id="${pageId}" not found`);
+                return;
+            }
 
             if (pageId === 'post-login-page') {
-                const name = userEmail.split('@')[0];
-                document.getElementById('welcome-message').textContent = `Good day, Dr. ${name.charAt(0).toUpperCase() + name.slice(1)}!`;
+                const welcome = document.getElementById('welcome-message');
+                if (welcome) welcome.textContent = `Good day, Dr. ${userFirstName}!`;
             }
 
             if (pageId === 'scan-page') startQuotes();
+            if (pageId === 'patient-records') loadPatientRecords();
+
+            if (pageId === 'add-patient-page') {
+                resetAddForm();
+
+                if (currentEditId) {
+                    setTimeout(() => {
+                        if (document.getElementById('add-patient-page').classList.contains('active')) {
+                            loadPatientForEdit(currentEditId);
+                            const title = document.getElementById('form-title');
+                            if (title) title.textContent = 'Edit Patient Record';
+                            lastAnalyzedPatientId = null;
+                            lastAnalysisResult = null;
+                        }
+                    }, 150);
+                } else {
+                    const title = document.getElementById('form-title');
+                    if (title) title.textContent = 'Add Patient Record';
+                    if (lastAnalyzedPatientId || lastAnalysisResult) {
+                        setTimeout(autoFillFromAnalysis, 150);
+                    }
+                }
+            }
+        }
+
+        function resetAddForm() {
+            const form = document.querySelector('.record-form');
+            if (!form) return;
+
+            form.querySelectorAll('input, textarea, select').forEach(el => {
+                if (el.type === 'file') {
+                    el.value = '';
+                    const preview = document.getElementById('passport-preview');
+                    const nameEl = document.getElementById('passport-name');
+                    const clearBtn = document.getElementById('clear-passport');
+                    if (preview) preview.style.display = 'none';
+                    if (nameEl) nameEl.textContent = 'No file chosen';
+                    if (clearBtn) clearBtn.style.display = 'none';
+                } else if (el.type !== 'button') {
+                    el.value = '';
+                    el.removeAttribute('readonly');
+                    el.style.background = '#444';
+                }
+            });
+        }
+
+        function autoFillFromAnalysis() {
+            if (!lastAnalyzedPatientId && !lastAnalysisResult) return;
+
+            const patientIdEl = document.getElementById('patient-id');
+            if (patientIdEl) patientIdEl.value = lastAnalyzedPatientId || '';
+
+            if (lastAnalysisResult) {
+                const fields = {
+                    'tumor-segmented-by-ai': `Positive (Tumor Segmented), ${lastAnalysisResult.confidence || 'N/A'}%`,
+                    'tumor-size': lastAnalysisResult.tumor_size || 'N/A',
+                    'tumor-type': lastAnalysisResult.tumor_type || 'N/A',
+                    'tumor-location': lastAnalysisResult.tumor_location || 'N/A',
+                    'tumor-grade': lastAnalysisResult.tumor_grade || 'N/A'
+                };
+
+                Object.entries(fields).forEach(([id, value]) => {
+                    const el = document.getElementById(id);
+                    if (el) {
+                        el.value = value;
+                        el.setAttribute('readonly', 'readonly');
+                    }
+                });
+            }
+        }
+
+        function navigateToFreshAddPage() {
+            currentEditId = null;
+            lastAnalyzedPatientId = null;
+            lastAnalysisResult = null;
+            navigate('add-patient-page');
         }
 
         function navigateBack() {
@@ -263,76 +648,413 @@
         function confirmLogout() {
             if (confirm('Are you sure you want to log out?')) {
                 userEmail = '';
+                userFirstName = '';
                 navigate('landing-page');
             }
         }
 
-        async function analyzeScan() {
-            const fileInput = document.getElementById('file-input');
-            if (!fileInput.files.length) return alert('Select file first');
+        function previewPassport() {
+            const file = document.getElementById('passport-upload').files[0];
+            const preview = document.getElementById('passport-preview');
+            const clearBtn = document.getElementById('clear-passport');
+            const nameEl = document.getElementById('passport-name');
 
-            const file = fileInput.files[0];
-            const ext = file.name.split('.').pop().toLowerCase();
-            if (!['png','jpg','jpeg','dcm','nii','nii.gz'].includes(ext)) {
-                alert('Please upload a brain MRI scan (PNG, JPG, JPEG, DICOM, NII, or NII.GZ only)');
-                return;
+            if (file) {
+                nameEl.textContent = file.name;
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                    clearBtn.style.display = 'inline-block';
+                };
+                reader.readAsDataURL(file);
+            } else {
+                nameEl.textContent = 'No file chosen';
+                preview.style.display = 'none';
+                clearBtn.style.display = 'none';
+            }
+        }
+
+        function clearPassport() {
+            document.getElementById('passport-upload').value = '';
+            document.getElementById('passport-preview').style.display = 'none';
+            document.getElementById('passport-name').textContent = 'No file chosen';
+            document.getElementById('clear-passport').style.display = 'none';
+        }
+
+        function validatePatientForm() {
+            let valid = true;
+            const requiredFields = ['patient-id', 'full-name'];
+            let errors = [];
+
+            requiredFields.forEach(id => {
+                const el = document.getElementById(id);
+                if (!el) {
+                    console.error(`Required field missing: #${id}`);
+                    errors.push(`Field #${id} is missing`);
+                    valid = false;
+                } else if (!el.value.trim()) {
+                    el.style.borderColor = '#ff4d4d';
+                    errors.push(`${el.previousElementSibling?.textContent?.replace('*','').trim() || id} is required.`);
+                    valid = false;
+                } else {
+                    el.style.borderColor = '#555';
+                }
+            });
+
+            if (!valid && errors.length > 0) {
+                alert("Please correct the following:\n\n" + errors.join("\n"));
             }
 
-            document.getElementById('file-name').textContent = file.name;
-            document.getElementById('loader').style.display = 'block';
-            document.getElementById('result').style.display = 'none';
-            document.getElementById('button-container').style.display = 'none';
+            return valid;
+        }
+
+        async function savePatientRecord() {
+            console.log("Save Patient Record button clicked");
+
+            if (!validatePatientForm()) return;
 
             const formData = new FormData();
-            formData.append('file', file);
+
+            const getValueSafe = (id) => {
+                const el = document.getElementById(id);
+                return el ? (el.value || '').trim() : '';
+            };
+
+            formData.append('id', getValueSafe('patient-id'));
+            formData.append('full_name', getValueSafe('full-name'));
+            formData.append('dob', getValueSafe('dob'));
+            formData.append('gender', getValueSafe('gender'));
+            formData.append('phone', getValueSafe('phone'));
+            formData.append('address', getValueSafe('address'));
+            formData.append('emergency_contact', getValueSafe('emergency-contact'));
+            formData.append('insurance', getValueSafe('insurance'));
+            formData.append('assigned_doctor', getValueSafe('doctor'));
+            formData.append('family_history_brain', getValueSafe('family-history-brain'));
+            formData.append('symptoms', getValueSafe('symptoms'));
+            formData.append('previous_conditions', getValueSafe('previous-conditions'));
+            formData.append('current_medications', getValueSafe('current-medications'));
+            formData.append('scan_date', getValueSafe('scan-date'));
+            formData.append('scan_type', getValueSafe('scan-type'));
+            formData.append('tumor_segmented_by_ai', getValueSafe('tumor-segmented-by-ai'));
+            formData.append('tumor_size', getValueSafe('tumor-size'));
+            formData.append('tumor_type', getValueSafe('tumor-type'));
+            formData.append('tumor_location', getValueSafe('tumor-location'));
+            formData.append('tumor_grade', getValueSafe('tumor-grade'));
+            formData.append('biopsy_result', getValueSafe('biopsy-result'));
+            formData.append('histology', getValueSafe('histology'));
+            formData.append('diagnosis_date', getValueSafe('diagnosis-date'));
+            formData.append('treatment_type', getValueSafe('treatment-type'));
+            formData.append('treatment_start', getValueSafe('treatment-start'));
+            formData.append('response_to_treatment', getValueSafe('response-to-treatment'));
+
+            const passportFile = document.getElementById('passport-upload')?.files?.[0];
+            if (passportFile) {
+                formData.append('passport', passportFile);
+            }
 
             try {
-                const res = await fetch('http://127.0.0.1:5000/analyze', {
+                const response = await fetch('/api/patients', {
                     method: 'POST',
                     body: formData
                 });
 
-                if (!res.ok) {
-                    let errorMsg = `Server error (${res.status})`;
-                    try {
-                        const errData = await res.json();
-                        errorMsg = errData.error || errorMsg;
-                    } catch {}
-                    throw new Error(errorMsg);
+                const data = await response.json();
+
+                if (response.ok && data.success) {
+                    alert('Patient record saved successfully!');
+                    lastAnalyzedPatientId = null;
+                    lastAnalysisResult = null;
+                    currentEditId = null;
+                    navigate('patient-records');
+                    loadPatientRecords();
+                } else {
+                    alert('Error saving record: ' + (data.error || `Server status: ${response.status}`));
+                }
+            } catch (err) {
+                console.error("Save failed:", err);
+                alert('Network or server error: ' + err.message);
+            }
+        }
+
+        async function loadPatientRecords() {
+            try {
+                const response = await fetch('/api/patients');
+                if (!response.ok) throw new Error('Failed to load patients');
+                const patients = await response.json();
+
+                const tbody = document.getElementById('patient-table-body');
+                tbody.innerHTML = '';
+
+                patients.forEach(p => {
+                    const row = document.createElement('tr');
+                    row.dataset.id = p.id;
+                    row.innerHTML = `
+                        <td><input type="radio" name="selected-patient" value="${p.id}"></td>
+                        <td>${p.id}</td>
+                        <td>${p.full_name || 'N/A'}</td>
+                        <td>${p.dob || '-'}</td>
+                        <td>${p.phone || '-'}</td>
+                        <td><a href="#" onclick="viewPatientScans('${p.id}'); return false;">View Scans</a></td>
+                    `;
+                    tbody.appendChild(row);
+                });
+            } catch (err) {
+                console.error(err);
+                alert('Could not load patient records. Make sure Flask is running.');
+            }
+        }
+
+        function filterPatients() {
+            const filter = document.getElementById('search-patient').value.toLowerCase();
+            const rows = document.querySelectorAll('#patient-table-body tr');
+
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                row.style.display = text.includes(filter) ? '' : 'none';
+            });
+        }
+
+        async function viewPatientScans(patientId) {
+            try {
+                const response = await fetch(`/api/patient/${patientId}/scans`);
+                if (!response.ok) throw new Error('Failed to load scans');
+                const scans = await response.json();
+
+                let message = `Scans for patient ${patientId}:\n\n`;
+                if (scans.length === 0) {
+                    message += "No scans associated with this patient yet.";
+                } else {
+                    scans.forEach(s => {
+                        message += `• ${s.date} | ${s.result} (${s.confidence}% confidence)\n  Size: ${s.tumor_size || 'N/A'} | Type: ${s.tumor_type || 'N/A'} | Location: ${s.tumor_location || 'N/A'} | Grade: ${s.tumor_grade || 'N/A'}\n  Segmented file: ${s.segmented}\n\n`;
+                    });
+                }
+                alert(message);
+            } catch (err) {
+                alert('Could not load scans: ' + err.message);
+            }
+        }
+
+        function getSelectedPatientId() {
+            const selected = document.querySelector('input[name="selected-patient"]:checked');
+            return selected ? selected.value : null;
+        }
+
+        async function editSelectedPatient() {
+            const id = getSelectedPatientId();
+            if (!id) {
+                alert('Please select a patient to edit.');
+                return;
+            }
+            currentEditId = id;
+            navigate('add-patient-page');
+        }
+
+        async function viewSelectedPatient() {
+            const id = getSelectedPatientId();
+            if (!id) {
+                alert('Please select a patient to view.');
+                return;
+            }
+            currentViewedId = id;
+            await loadPatientForView(id);
+            navigate('view-patient-page');
+        }
+
+        async function deleteSelectedPatient() {
+            const id = getSelectedPatientId();
+            if (!id) {
+                alert('Please select a patient to delete.');
+                return;
+            }
+            if (confirm('This action cannot be reversed. Are you sure you want to delete this patient record?')) {
+                try {
+                    const response = await fetch(`/api/patient/${id}`, { method: 'DELETE' });
+                    const data = await response.json();
+                    if (data.success) {
+                        alert('Patient deleted successfully.');
+                        loadPatientRecords();
+                    } else {
+                        alert('Error deleting patient: ' + (data.error || 'Unknown error'));
+                    }
+                } catch (err) {
+                    alert('Network error: ' + err.message);
+                }
+            }
+        }
+
+        async function loadPatientForEdit(id) {
+            try {
+                const response = await fetch(`/api/patient/${id}`);
+                if (!response.ok) throw new Error(`Failed to load patient: ${response.status}`);
+
+                const p = await response.json();
+
+                if (!document.getElementById('add-patient-page').classList.contains('active')) {
+                    console.warn("Not on add-patient-page anymore - aborting edit load");
+                    return;
                 }
 
-                const data = await res.json();
+                const setValueIfExists = (id, value) => {
+                    const el = document.getElementById(id);
+                    if (el) {
+                        el.value = value || '';
+                    } else {
+                        console.warn(`Edit field #${id} not found`);
+                    }
+                };
 
-                if (!data.success) throw new Error(data.error || 'Analysis failed');
+                // Text fields
+                setValueIfExists('patient-id', p.id);
+                setValueIfExists('full-name', p.full_name);
+                setValueIfExists('dob', p.dob);
+                setValueIfExists('gender', p.gender);
+                setValueIfExists('phone', p.phone);
+                setValueIfExists('address', p.address);
+                setValueIfExists('emergency-contact', p.emergency_contact);
+                setValueIfExists('insurance', p.insurance);
+                setValueIfExists('doctor', p.assigned_doctor);
+                setValueIfExists('family-history-brain', p.family_history_brain);
+                setValueIfExists('symptoms', p.symptoms);
+                setValueIfExists('previous-conditions', p.previous_conditions);
+                setValueIfExists('current-medications', p.current_medications);
+                setValueIfExists('scan-date', p.scan_date);
+                setValueIfExists('scan-type', p.scan_type);
+                setValueIfExists('tumor-segmented-by-ai', p.tumor_segmented_by_ai);
+                setValueIfExists('tumor-size', p.tumor_size);
+                setValueIfExists('tumor-type', p.tumor_type);
+                setValueIfExists('tumor-location', p.tumor_location);
+                setValueIfExists('tumor-grade', p.tumor_grade);
+                setValueIfExists('biopsy-result', p.biopsy_result);
+                setValueIfExists('histology', p.histology);
+                setValueIfExists('diagnosis-date', p.diagnosis_date);
+                setValueIfExists('treatment-type', p.treatment_type);
+                setValueIfExists('treatment-start', p.treatment_start);
+                setValueIfExists('response-to-treatment', p.response_to_treatment);
 
-                document.getElementById('result').innerHTML = `
-                    <p><strong class="positive-result">${data.result}</strong></p>
-                    <p><strong>Confidence Score:</strong> <span class="result-highlight">${data.confidence}%</span></p>
-                    <p><strong>Dice Estimate:</strong> <span class="result-highlight">${(data.confidence / 100).toFixed(4)}</span></p>
+                // Passport preview for edit mode
+                const previewImg = document.getElementById('passport-preview');
+                const nameEl = document.getElementById('passport-name');
+                const clearBtn = document.getElementById('clear-passport');
 
-                    <div id="result-image">
-                        <p style="text-align:center; font-weight:bold; margin-bottom:20px; color:#80cbc4; font-size:1.3em;">
-                            Segmented Brain MRI Slice with Tumor Highlighted (Red = Tumor)
-                        </p>
-                        <img src="${data.segmented_url || ''}" alt="Segmented MRI" style="max-width:100%; height:auto; border-radius:12px; box-shadow:0 6px 25px rgba(0,0,0,0.7);">
+                if (p.passport_url && previewImg) {
+                    previewImg.src = p.passport_url;
+                    previewImg.style.display = 'block';
+                    if (clearBtn) clearBtn.style.display = 'inline-block';
+                    if (nameEl) nameEl.textContent = 'Existing passport loaded';
+                } else {
+                    if (previewImg) previewImg.style.display = 'none';
+                    if (clearBtn) clearBtn.style.display = 'none';
+                    if (nameEl) nameEl.textContent = 'No passport image';
+                }
+
+                console.log(`Edit data (including passport) loaded for patient ${id}`);
+            } catch (err) {
+                console.error("Edit load failed:", err);
+                alert('Could not load patient for edit: ' + err.message);
+            }
+        }
+
+        async function loadPatientForView(id) {
+            try {
+                const response = await fetch(`/api/patient/${id}`);
+                if (!response.ok) throw new Error('Failed to load patient');
+                const p = await response.json();
+
+                const detail = document.getElementById('view-patient-detail');
+                detail.innerHTML = `
+                    <div class="passport-container">
+                        <img src="${p.passport_url || 'default-passport.jpg'}" alt="Patient Passport">
                     </div>
+                    <div class="content">
+                        <p><strong>Patient ID:</strong> ${p.id || 'Tumor-3456'}</p>
+                        <p><strong>Full Name:</strong> ${p.full_name || 'N/A'}</p>
+                        <p><strong>Date of Birth:</strong> ${p.dob || 'N/A'} (Age: ${calculateAge(p.dob) || 'N/A'})</p>
+                        <p><strong>Gender:</strong> ${p.gender || 'N/A'}</p>
+                        <p><strong>Assigned Doctor:</strong> ${p.assigned_doctor || 'N/A'}</p>
+                        <p><strong>Last Updated:</strong> ${p.updated_at || 'N/A'}</p>
+                        <a class="view-docs" href="#" onclick="editPatientFromView('${p.id}'); return false;">VIEW DOCUMENTS</a>
 
-                    <p class="disclaimer" style="text-align:center; margin-top:30px;">
-                        Disclaimer: This tool is intended solely for use by licensed medical professionals, including neuroradiologists and neurosurgeons. It provides AI-assisted brain tumor segmentation to support research and clinical assessment. Final interpretation, diagnosis, treatment decisions, and patient care remain the sole responsibility of the medical professional. This system is designed to assist, not replace, professional medical judgment.
+                        <div class="detail-section">
+                            <h4>Medical History</h4>
+                            <p>Family History: ${p.family_history_brain || 'N/A'}</p>
+                            <p>Symptoms: ${p.symptoms || 'N/A'}</p>
+                            <p>Previous Conditions: ${p.previous_conditions || 'N/A'}</p>
+                            <p>Current Medications: ${p.current_medications || 'N/A'}</p>
+                        </div>
+
+                        <div class="detail-section">
+                            <h4>Imaging and AI Results</h4>
+                            <p>Scan Date: ${p.scan_date || 'N/A'}</p>
+                            <p>Scan Type: ${p.scan_type || 'N/A'}</p>
+                            <p>Tumor Segmented by AI Model: ${p.tumor_segmented_by_ai || 'N/A'}</p>
+                            <a class="view-segmentation" href="#" onclick="viewPatientSegmentation('${p.id}'); return false;">VIEW SEGMENTATION</a>
+                        </div>
+
+                        <div class="detail-section">
+                            <h4>Laboratory and Biopsy</h4>
+                            <p>Biopsy Result: ${p.biopsy_result || 'N/A'}</p>
+                            <p>Histology: ${p.histology || 'N/A'}</p>
+                        </div>
+
+                        <div class="detail-section">
+                            <h4>Treatment Plan</h4>
+                            <p>Diagnosis Date: ${p.diagnosis_date || 'N/A'}</p>
+                            <p>Treatment Type: ${p.treatment_type || 'N/A'}</p>
+                            <p>Treatment Start: ${p.treatment_start || 'N/A'}</p>
+                            <p>Response to Treatment: ${p.response_to_treatment || 'N/A'}</p>
+                        </div>
+                    </div>
+                `;
+            } catch (err) {
+                alert('Could not load patient: ' + err.message);
+            }
+        }
+
+        async function viewPatientSegmentation(patientId) {
+            try {
+                const scansRes = await fetch(`/api/patient/${patientId}/scans`);
+                if (!scansRes.ok) throw new Error('Failed to load scans');
+                const scans = await scansRes.json();
+
+                if (scans.length === 0) {
+                    alert("No segmented scans available for this patient yet.");
+                    return;
+                }
+
+                const latest = scans[0];
+
+                document.getElementById('modal-segmented-image').innerHTML = `
+                    <img src="${latest.segmented}" alt="Segmented MRI" style="max-width:100%; max-height:620px; border-radius:14px; box-shadow:0 8px 30px rgba(0,0,0,0.7);">
+                    <p style="margin-top:15px; color:#bbb; font-size:0.98em;">
+                        Full segmented slice with tumor region highlighted in red (AI prediction)
                     </p>
                 `;
-                document.getElementById('result').style.display = 'block';
-                document.getElementById('button-container').style.display = 'flex';
+
+                document.getElementById('modal-confidence').innerHTML = `<strong>Confidence:</strong> ${latest.confidence || 'N/A'}%`;
+                document.getElementById('modal-tumor-size').innerHTML = `<strong>Tumor Size:</strong> ${latest.tumor_size || 'N/A'}`;
+                document.getElementById('modal-tumor-type').innerHTML = `<strong>Tumor Type:</strong> ${latest.tumor_type || 'N/A'}`;
+                document.getElementById('modal-tumor-location').innerHTML = `<strong>Tumor Location:</strong> ${latest.tumor_location || 'N/A'}`;
+                document.getElementById('modal-tumor-grade').innerHTML = `<strong>Tumor Grade:</strong> ${latest.tumor_grade || 'N/A'}`;
+
+                document.getElementById('segmentation-modal').style.display = 'flex';
             } catch (err) {
-                document.getElementById('result').innerHTML = `
-                    <p class="error-message">Error: ${err.message}</p>
-                    <p style="color:#ffcc00;">Make sure Flask (app.py) is running on http://127.0.0.1:5000</p>
-                `;
-                document.getElementById('result').style.display = 'block';
-                console.error('Fetch error:', err);
-            } finally {
-                document.getElementById('loader').style.display = 'none';
+                alert('Could not load segmentation result: ' + err.message);
             }
+        }
+
+        function editPatientFromView(id) {
+            currentEditId = id;
+            navigate('add-patient-page');
+        }
+
+        function calculateAge(dob) {
+            if (!dob) return 'N/A';
+            const [day, month, year] = dob.split('/');
+            const birthDate = new Date(year, month - 1, day);
+            const ageDifMs = Date.now() - birthDate.getTime();
+            const ageDate = new Date(ageDifMs);
+            return Math.abs(ageDate.getUTCFullYear() - 1970);
         }
 
         function startQuotes() {
@@ -355,9 +1077,15 @@
             setInterval(next, 6000);
         }
 
-        function saveAsRecord() { alert('Scan saved to patient record.'); }
         function printResult() { window.print(); }
-        function shareResult() { alert('Result shared (demo).'); }
+
+        function shareResult() { 
+            const scanUrl = document.querySelector('#result-image img')?.src || '';
+            const confidence = document.querySelector('.result-highlight')?.textContent || 'N/A';
+            const body = `Dear Colleague,\n\nAttached is the scan result from TumorSeg.\n\nScan Details:\n- Result: Positive (Tumor Segmented)\n- Confidence: ${confidence}\n- Segmented Image: ${scanUrl}\n\nBest Regards,\nThe TumorSeg Team`;
+            window.location.href = `mailto:?subject=Scan Result from TumorSeg&body=${encodeURIComponent(body)}`;
+        }
+
         function confirmDeleteScan() { 
             if (confirm('Delete this analysis?')) {
                 document.getElementById('result').style.display = 'none';
@@ -366,11 +1094,81 @@
             }
         }
 
-        function addRecord() { alert('Add record page - coming soon'); }
-        function saveRecord() { alert('Patient record saved successfully.'); }
+        function saveScanAsRecord() {
+            navigate('add-patient-page');
+        }
 
-        function filterPatients() {
-            alert('Searching patients... (demo)');
+        async function analyzeScan() {
+            const fileInput = document.getElementById('file-input');
+            if (!fileInput.files.length) return alert('Please select a file first');
+
+            const file = fileInput.files[0];
+            const ext = file.name.split('.').pop().toLowerCase();
+            if (!['png','jpg','jpeg','dcm','nii','nii.gz'].includes(ext)) {
+                alert('Supported formats: PNG, JPG, JPEG, DICOM, NII, NII.GZ');
+                return;
+            }
+
+            document.getElementById('file-name').textContent = file.name;
+            document.getElementById('loader').style.display = 'block';
+            document.getElementById('result').style.display = 'none';
+            document.getElementById('button-container').style.display = 'none';
+
+            const formData = new FormData();
+            formData.append('file', file);
+
+            const patientId = prompt("Enter Patient ID to associate this scan (required)", "");
+            if (!patientId || !patientId.trim()) {
+                alert('Scan must be linked to a patient ID.');
+                document.getElementById('loader').style.display = 'none';
+                return;
+            }
+            lastAnalyzedPatientId = patientId.trim();
+            formData.append('patient_id', lastAnalyzedPatientId);
+
+            try {
+                const res = await fetch('http://127.0.0.1:5000/analyze', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await res.json();
+
+                if (!res.ok || !data.success) {
+                    throw new Error(data.error || 'Analysis failed');
+                }
+
+                lastAnalysisResult = data;
+
+                document.getElementById('result').innerHTML = `
+                    <p><strong class="positive-result">${data.result}</strong></p>
+                    <p><strong>Confidence Score:</strong> <span class="result-highlight">${data.confidence}%</span></p>
+                    <p><strong>Tumor Size:</strong> ${data.tumor_size || 'N/A'}</p>
+                    <p><strong>Tumor Type:</strong> ${data.tumor_type || 'N/A'}</p>
+                    <p><strong>Tumor Location:</strong> ${data.tumor_location || 'N/A'}</p>
+                    <p><strong>Tumor Grade:</strong> ${data.tumor_grade || 'N/A'}</p>
+
+                    <div id="result-image">
+                        <p style="text-align:center; font-weight:bold; margin-bottom:20px; color:#80cbc4; font-size:1.3em;">
+                            Segmented Brain MRI Slice with Tumor Highlighted (Red = Tumor)
+                        </p>
+                        <img src="${data.segmented_url}" alt="Segmented MRI">
+                    </div>
+
+                    <p class="disclaimer">Disclaimer: This tool is intended solely for use by licensed medical professionals, including neuroradiologists and neurosurgeons. It provides AI-assisted brain tumor segmentation to support research and clinical assessment. Final interpretation, diagnosis, treatment decisions, and patient care remain the sole responsibility of the medical professional. This system is designed to assist, not replace, professional medical judgment.</p>
+                `;
+                document.getElementById('result').style.display = 'block';
+                document.getElementById('button-container').style.display = 'flex';
+            } catch (err) {
+                document.getElementById('result').innerHTML = `
+                    <p class="error-message">Error: ${err.message}</p>
+                    <p style="color:#ffcc00;">Check Flask terminal for details.</p>
+                `;
+                document.getElementById('result').style.display = 'block';
+                console.error(err);
+            } finally {
+                document.getElementById('loader').style.display = 'none';
+            }
         }
 
         navigate('landing-page');
