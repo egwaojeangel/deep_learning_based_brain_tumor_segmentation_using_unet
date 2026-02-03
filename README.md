@@ -17,7 +17,6 @@ Brain tumor segmentation plays a critical role in diagnosis, treatment planning,
 ---
 
 ## Key Objectives  
-#Objectives #ClinicalAI #SegmentationGoals
 - Implement a U-Net–based segmentation model for brain tumor detection  
 - Train and evaluate the model on BraTS MRI data  
 - Achieve reliable segmentation performance using Dice-based evaluation  
@@ -27,7 +26,6 @@ Brain tumor segmentation plays a critical role in diagnosis, treatment planning,
 ---
 
 ## Results  
-#Results #ModelPerformance #SegmentationMetrics
 The trained model demonstrated strong segmentation performance on unseen test data:
 
 - **Test Dice Score:** 91.47% 
@@ -48,13 +46,11 @@ These results indicate high overlap between predicted tumor regions and ground-t
 This project uses the **BraTS 2021 (Brain Tumor Segmentation Challenge)** dataset, a widely adopted benchmark in medical imaging research.
 
 ### Dataset Characteristics  
-#DatasetDetails
 - Multi-institutional MRI scans  
 - Expert-annotated tumor segmentation masks  
 - Multiple MRI modalities (FLAIR, T1, T1ce, T2)  
 
 ### Modality Used in This Project  
-#FLAIR #MRIModality
 **FLAIR (Fluid-Attenuated Inversion Recovery)**  
 Chosen due to its strong contrast for highlighting tumor-associated edema.
 
@@ -64,7 +60,6 @@ Chosen due to its strong contrast for highlighting tumor-associated edema.
 ---
 
 ## Data Preparation & Split  
-#DataSplit #Preprocessing
 - Patient-level split to prevent data leakage  
 - Training: 70%  
 - Validation: 15%  
