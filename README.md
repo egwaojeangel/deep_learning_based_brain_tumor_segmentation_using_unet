@@ -42,7 +42,6 @@ These results indicate high overlap between predicted tumor regions and ground-t
 ---
 
 ## Dataset  
-#Dataset #BraTS #MedicalDatasets
 This project uses the **BraTS 2021 (Brain Tumor Segmentation Challenge)** dataset, a widely adopted benchmark in medical imaging research.
 
 ### Dataset Characteristics  
