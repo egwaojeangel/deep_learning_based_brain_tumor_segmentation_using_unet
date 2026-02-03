@@ -1,5 +1,4 @@
 # 🧠 Brain Tumor Segmentation Using U-Net on MRI Scans  
-#BrainTumorSegmentation #UNet #MedicalImageSegmentation #MRI #DeepLearning #MedicalAI
 
 **Core Stack:** Python (PyTorch) · Deep Learning · Medical Image Segmentation · MRI  
 **Model:** U-Net  
