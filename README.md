@@ -60,7 +60,7 @@ Chosen due to its strong contrast for highlighting tumor-associated edema.
 ---
 
 ## Data Preparation & Split  
-- Patient-level split to prevent data leakage  
+Patient-level split to prevent data leakage  
 - Training: 70%  
 - Validation: 15%  
 - Testing: 15%  
