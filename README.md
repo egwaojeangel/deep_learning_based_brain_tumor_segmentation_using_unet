@@ -186,7 +186,7 @@ It is not a certified medical device and must not be used for clinical diagnosis
 ### Demo Video
 Watch the brain tumor segmentation model in action:
 
-[![Watch the video](screenshots/video_thumbnail.png)](https://drive.google.com/file/d/YOUR_VIDEO_LINK/view?usp=sharing)
+[![Watch the video](https://github.com/egwaojeangel/deep_learning_based_brain_tumor_segmentation_using_unet/blob/main/screenshots_on_tumor_seg/Upload_Scan.jpeg)](https://drive.google.com/file/d/YOUR_VIDEO_LINK/view?usp=sharing)
 
 ---
 
