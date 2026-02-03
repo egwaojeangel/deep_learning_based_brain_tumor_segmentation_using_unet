@@ -79,7 +79,6 @@ Only **2D slices containing tumor regions** were selected for training and evalu
 Each MRI slice is treated as a **single-channel (grayscale)** input.
 
 ### Data Augmentation (Training Only)  
-#DataAugmentation #Generalization
 To improve generalization, the following augmentations were applied:
 
 - Horizontal flipping  
@@ -91,8 +90,6 @@ Augmentations were applied consistently to both images and masks to preserve spa
 ---
 
 ## Model Architecture  
-#ModelArchitecture #UNet #SegmentationModel
-
 ### U-Net  
 The model is based on the original **U-Net architecture**, consisting of:
 
@@ -115,7 +112,6 @@ The model is based on the original **U-Net architecture**, consisting of:
 ---
 
 ## Training Details  
-#Training #Optimization #PyTorch
 - **Framework:** PyTorch  
 - **Loss Function:** Binary Cross-Entropy (BCELoss)  
 - **Optimizer:** Adam  
@@ -125,7 +121,6 @@ The model is based on the original **U-Net architecture**, consisting of:
 - **Device:** CPU  
 
 ### Training Stability Techniques  
-#TrainingStability #Reproducibility
 - Gradient clipping (max norm = 1.0)  
 - Mid-epoch checkpoint saving  
 - Automatic resume from last checkpoint  
@@ -134,7 +129,6 @@ The model is based on the original **U-Net architecture**, consisting of:
 ---
 
 ## Evaluation Metrics  
-#EvaluationMetrics #MedicalSegmentation
 The model was evaluated using standard segmentation metrics:
 
 - Dice Coefficient (primary metric)  
@@ -149,7 +143,6 @@ Dice score was prioritized due to its robustness for class-imbalanced segmentati
 ---
 
 ## Checkpointing & Reproducibility  
-#Checkpointing #Reproducibility
 The training pipeline includes:
 
 - `latest_checkpoint.pth` – latest training state  
@@ -160,7 +153,6 @@ Training can be safely resumed after interruption without loss of progress.
 ---
 
 ## Relation to Existing Research  
-#RelatedWork #ResearchContext
 U-Net–based architectures remain a dominant baseline for brain tumor segmentation tasks. Recent studies continue to demonstrate their effectiveness on BraTS datasets, particularly when combined with careful preprocessing and evaluation strategies (Isensee et al., 2021; Hatamizadeh et al., 2022; Zhang et al., 2023).
 
 This project aligns with these works by implementing a clean, reproducible U-Net pipeline, serving as a strong baseline for future extensions.
@@ -168,7 +160,6 @@ This project aligns with these works by implementing a clean, reproducible U-Net
 ---
 
 ## Limitations  
-#Limitations #ResearchChallenges
 - Uses 2D slice-based segmentation instead of full 3D volumes  
 - Single MRI modality (FLAIR only)  
 - No clinical validation or expert radiologist review  
@@ -177,7 +168,6 @@ This project aligns with these works by implementing a clean, reproducible U-Net
 ---
 
 ## Future Work  
-#FutureWork #ResearchDirections
 - Extend to 3D U-Net or nnU-Net  
 - Incorporate multi-modal MRI inputs  
 - Add Dice + Focal loss combinations  
@@ -188,13 +178,11 @@ This project aligns with these works by implementing a clean, reproducible U-Net
 ---
 
 ## Disclaimer  
-#Disclaimer #MedicalEthics
 This project is intended **strictly for research and educational purposes**.  
 It is not a certified medical device and must not be used for clinical diagnosis or treatment decisions.
 
 ---
 
 ## Author  
-#Author #AIResearcher
 **Angel Egwaoje**
 
