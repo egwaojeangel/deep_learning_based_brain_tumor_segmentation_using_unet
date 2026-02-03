@@ -29,10 +29,10 @@ Brain tumor segmentation plays a critical role in diagnosis, treatment planning,
 The trained model demonstrated strong segmentation performance on unseen test data:
 
 - **Test Dice Score:** 91.47% 
-- **Test Accuracy:** 99.54%  
-- **Test F1 Score:** 91.47%  
-- **Test Sensitivity (Recall):** 89.93%  
-- **Test Specificity:** 99.81%  
+- **Test Accuracy:** 99.58%  
+- **Test F1 Score:** 92.16%  
+- **Test Sensitivity (Recall):** 90.64%  
+- **Test Specificity:** 99.83%  
 
 Checkpoints saved in:  
 `C:\Users\egwao\checkpoints_brats_unet`
