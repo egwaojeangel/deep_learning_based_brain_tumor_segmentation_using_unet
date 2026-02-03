@@ -8,7 +8,6 @@
 ---
 
 ## Overview  
-#Overview #MedicalImagingAI #Segmentation
 This project presents a deep learning–based brain tumor segmentation system implemented using Magnetic Resonance Imaging (MRI) scans. The system is built around the **U-Net architecture**, a well-established convolutional neural network designed for biomedical image segmentation.
 
 The implementation focuses on **pixel-level tumor segmentation** from 2D MRI slices extracted from the **BraTS 2021 dataset**, using the **FLAIR modality**. Rather than conducting a full clinical study, this project emphasizes **correct implementation, training stability, evaluation, and reproducibility** of a modern medical image segmentation pipeline.
@@ -31,11 +30,11 @@ Brain tumor segmentation plays a critical role in diagnosis, treatment planning,
 #Results #ModelPerformance #SegmentationMetrics
 The trained model demonstrated strong segmentation performance on unseen test data:
 
-- **Test Dice Score:** 0.9147  
-- **Test Accuracy:** 0.9954  
-- **Test F1 Score:** 0.9147  
-- **Test Sensitivity (Recall):** 0.8993  
-- **Test Specificity:** 0.9981  
+- **Test Dice Score:** 91.47% 
+- **Test Accuracy:** 99.54%  
+- **Test F1 Score:** 91.47%  
+- **Test Sensitivity (Recall):** 89.93%  
+- **Test Specificity:** 99.81%  
 
 Checkpoints saved in:  
 `C:\Users\egwao\checkpoints_brats_unet`
@@ -75,11 +74,8 @@ Only **2D slices containing tumor regions** were selected for training and evalu
 
 ---
 
-## Methodology  
-#Methodology #DeepLearningPipeline
-
+## Methodology 
 ### Image Preprocessing  
-#ImagePreprocessing
 - Slice extraction from 3D NIfTI volumes  
 - Min–max intensity normalization  
 - Resizing to **96 × 96 pixels**  
