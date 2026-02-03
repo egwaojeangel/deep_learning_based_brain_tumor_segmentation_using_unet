@@ -183,6 +183,13 @@ It is not a certified medical device and must not be used for clinical diagnosis
 
 ---
 
+### Demo Video
+Watch the brain tumor segmentation model in action:
+
+[![Watch the video](screenshots/video_thumbnail.png)](https://drive.google.com/file/d/YOUR_VIDEO_LINK/view?usp=sharing)
+
+---
+
 ## Author  
 **Angel Egwaoje**
 
