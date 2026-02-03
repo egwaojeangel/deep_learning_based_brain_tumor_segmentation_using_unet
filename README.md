@@ -33,7 +33,7 @@ The trained model demonstrated strong segmentation performance on unseen test da
 - **Test Sensitivity (Recall):** 90.64%  
 - **Test Specificity:** 99.83%
 
-  ![Test Results](screenshots/brain_segmentation_test_results.png)
+  ![Test Results](https://github.com/egwaojeangel/deep_learning_based_brain_tumor_segmentation_using_unet/blob/main/screenshots_on_tumor_seg/brain_segmentation_test_results.png)
 
 Checkpoints saved in:  
 `C:\Users\egwao\checkpoints_brats_unet`
