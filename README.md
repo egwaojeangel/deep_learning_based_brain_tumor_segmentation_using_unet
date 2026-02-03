@@ -32,7 +32,9 @@ The trained model demonstrated strong segmentation performance on unseen test da
 - **Test Accuracy:** 99.58%  
 - **Test F1 Score:** 92.16%  
 - **Test Sensitivity (Recall):** 90.64%  
-- **Test Specificity:** 99.83%  
+- **Test Specificity:** 99.83%
+
+  ![Test Results](screenshots/brain_segmentation_test_results.png)
 
 Checkpoints saved in:  
 `C:\Users\egwao\checkpoints_brats_unet`
