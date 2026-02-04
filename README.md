@@ -183,7 +183,7 @@ It is not a certified medical device and must not be used for clinical diagnosis
 
 ---
 
-### Demo Video
+### Demo Video (Click to Watch)
 Watch the brain tumor segmentation model in action:
 
 [![Watch the video](https://github.com/egwaojeangel/deep_learning_based_brain_tumor_segmentation_using_unet/blob/main/screenshots_on_tumor_seg/Upload_Scan.jpeg)](https://drive.google.com/file/d/1H175DdmRg-RpnKBPS9IlPN6SOq7HavQL/view?usp=drivesdk)
