@@ -250,6 +250,20 @@ It is not a certified medical device and must not be used for clinical diagnosis
 
 ---
 
+## Sample Test Scans
+
+You can test the app immediately using these sample MRI scans 
+included in the repository:
+
+Sample_MRI_Images/
+├── 00000534_brain_flair.nii
+├── braintumor.jpg
+
+
+Simply upload any of these in the web app to see the 
+segmentation in action.
+
+---
 ### Demo Video (Click to Watch)
 Watch the brain tumor segmentation model in action:
 
