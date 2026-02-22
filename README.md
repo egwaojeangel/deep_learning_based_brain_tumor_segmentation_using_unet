@@ -137,9 +137,9 @@ Click the thumbnail above to watch the full system demo.
 
 ## Overview
 
-Brain tumor segmentation plays a critical role in diagnosis, treatment planning, and disease monitoring. Manual delineation by radiologists is time-consuming and subject to inter-observer variability — making automated deep learning solutions both practical and impactful.
+Brain tumor segmentation plays a critical role in diagnosis, treatment planning, and disease monitoring. Manual delineation by radiologists is time-consuming and subject to inter-observer variability, making automated deep learning solutions both practical and impactful.
 
-This project goes beyond a standard model training exercise. It implements a complete end-to-end pipeline: from raw NIfTI MRI volumes through preprocessing, U-Net inference, and pixel-level segmentation — all deployed in a web application with a full patient records dashboard.
+This project goes beyond a standard model training exercise. It implements a complete end-to-end pipeline: from raw NIfTI MRI volumes through preprocessing, U-Net inference, and pixel-level segmentation and these are all deployed in a web application with a full patient records dashboard.
 
 ---
 
