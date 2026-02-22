@@ -102,8 +102,8 @@ The trained model demonstrated strong segmentation performance on unseen test da
 
   ![Test Results](https://github.com/egwaojeangel/deep_learning_based_brain_tumor_segmentation_using_unet/blob/main/screenshots_on_tumor_seg/brain_segmentation_test_results.png)
 
-Checkpoints saved in:  
-`C:\Users\egwao\checkpoints_brats_unet`
+Checkpoints should be saved in a local `checkpoints/` folder:
+`checkpoints/best_model.pth`
 
 These results indicate high overlap between predicted tumor regions and ground-truth masks, with excellent background classification and minimal false positives.
 
