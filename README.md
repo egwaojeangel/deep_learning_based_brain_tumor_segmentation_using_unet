@@ -15,6 +15,73 @@ Brain tumor segmentation plays a critical role in diagnosis, treatment planning,
 
 ---
 
+## How to Run Locally
+
+### Prerequisites
+- Python 3.10 or higher
+- Git
+- A trained model checkpoint (`best_model.pth`)
+
+---
+
+### 1. Clone the repository
+
+git clone https://github.com/egwaojeangel/deep_learning_based_brain_tumor_segmentation_using_unet.git
+cd deep_learning_based_brain_tumor_segmentation_using_unet
+
+---
+
+### 2. Create a virtual environment (recommended)
+
+python -m venv venv
+
+# On Windows:
+venv\Scripts\activate
+
+# On Mac/Linux:
+source venv/bin/activate
+
+---
+
+### 3. Install dependencies
+
+pip install -r requirements.txt
+
+---
+
+### 4. Add your model checkpoint
+
+Place your trained `best_model.pth` file in a folder called `checkpoints`:
+
+deep_learning_based_brain_tumor_segmentation_using_unet/
+├── checkpoints/
+│   └── best_model.pth
+├── brainsegapp.py
+├── tumorseg.html
+└── ...
+
+Then open `brainsegapp.py` and update this line to match your path:
+
+MODEL_PATH = "checkpoints/best_model.pth"
+
+---
+
+### 5. Run the app
+
+python brainsegapp.py
+
+Then open your browser and go to:
+
+http://127.0.0.1:5000
+
+---
+
+### Supported Scan Formats
+- `.jpg`, `.png` — standard brain scan images
+- `.nii`, `.nii.gz` — NIfTI format (real hospital MRI files)
+
+  ---
+
 ## Key Objectives  
 - Implement a U-Net–based segmentation model for brain tumor detection  
 - Train and evaluate the model on BraTS MRI data  
