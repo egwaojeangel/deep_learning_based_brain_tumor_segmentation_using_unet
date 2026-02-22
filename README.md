@@ -1,276 +1,289 @@
-# 🧠 Brain Tumor Segmentation Using U-Net on MRI Scans  
+# 🧠 Brain Tumor Segmentation Using U-Net on MRI Scans
 
-**Core Stack:** Python (PyTorch) · Deep Learning · Medical Image Segmentation · MRI  
-**Model:** U-Net  
-**Dataset:** BraTS 2021 (FLAIR modality)
+![Python](https://img.shields.io/badge/Python-3.10+-blue?style=flat-square&logo=python)
+![PyTorch](https://img.shields.io/badge/PyTorch-2.0+-ee4c2c?style=flat-square&logo=pytorch)
+![Flask](https://img.shields.io/badge/Flask-3.x-black?style=flat-square&logo=flask)
+![Dice Score](https://img.shields.io/badge/Dice%20Score-91.47%25-brightgreen?style=flat-square)
+![Accuracy](https://img.shields.io/badge/Accuracy-99.58%25-brightgreen?style=flat-square)
+![License](https://img.shields.io/badge/License-MIT-yellow?style=flat-square)
 
----
+**Core Stack:** Python (PyTorch, Flask) · U-Net · Medical Image Segmentation · NIfTI · MRI
 
-## Overview  
-This project presents a deep learning–based brain tumor segmentation system implemented using Magnetic Resonance Imaging (MRI) scans. The system is built around the **U-Net architecture**, a well-established convolutional neural network designed for biomedical image segmentation.
-
-The implementation focuses on **pixel-level tumor segmentation** from 2D MRI slices extracted from the **BraTS 2021 dataset**, using the **FLAIR modality**. Rather than conducting a full clinical study, this project emphasizes **correct implementation, training stability, evaluation, and reproducibility** of a modern medical image segmentation pipeline.
-
-Brain tumor segmentation plays a critical role in diagnosis, treatment planning, and disease monitoring. Manual delineation by radiologists is time-consuming and subject to inter-observer variability, motivating the use of automated deep learning–based solutions.
+A deep learning system for automated **brain tumor segmentation** from MRI scans, achieving a **91.47% Dice Score** and **99.58% accuracy** using a U-Net architecture trained on the BraTS 2021 dataset. Deployed as a full web application with a built-in patient management dashboard supporting real hospital NIfTI file formats.
 
 ---
 
-## How to Run Locally
+## 📋 Table of Contents
+- [Results](#results)
+- [How to Run](#how-to-run)
+- [Overview](#overview)
+- [Dataset](#dataset)
+- [Methodology](#methodology)
+- [Model Architecture](#model-architecture)
+- [Training Details](#training-details)
+- [Web Application](#web-application)
+- [Limitations](#limitations)
+- [Future Work](#future-work)
+- [Disclaimer](#disclaimer)
+
+---
+
+## Results
+
+Strong segmentation performance on unseen test data:
+
+| Metric | Score |
+|---|---|
+| Dice Score (Primary) | **91.47%** |
+| Accuracy | **99.58%** |
+| F1 Score | **92.16%** |
+| Sensitivity (Recall) | **90.64%** |
+| Specificity | **99.83%** |
+
+![Test Results](screenshots_on_tumor_seg/brain_segmentation_test_results.png)
+
+High overlap between predicted tumor regions and ground-truth masks, with excellent background classification and minimal false positives.
+
+---
+
+## How to Run
 
 ### Prerequisites
 - Python 3.10 or higher
 - Git
 - A trained model checkpoint (`best_model.pth`)
 
----
-
 ### 1. Clone the repository
 
+```bash
 git clone https://github.com/egwaojeangel/deep_learning_based_brain_tumor_segmentation_using_unet.git
 cd deep_learning_based_brain_tumor_segmentation_using_unet
+```
 
----
+### 2. Create a virtual environment
 
-### 2. Create a virtual environment (recommended)
-
+```bash
 python -m venv venv
 
-# On Windows:
+# Windows
 venv\Scripts\activate
 
-# On Mac/Linux:
+# Mac/Linux
 source venv/bin/activate
-
----
+```
 
 ### 3. Install dependencies
 
+```bash
 pip install -r requirements.txt
-
----
+```
 
 ### 4. Add your model checkpoint
 
-Place your trained `best_model.pth` file in a folder called `checkpoints`:
+Place your trained `best_model.pth` in a `checkpoints/` folder:
 
+```
 deep_learning_based_brain_tumor_segmentation_using_unet/
 ├── checkpoints/
 │   └── best_model.pth
+├── Sample_MRI_Images/
+│   ├── 00000534_brain_flair.nii
+│   └── braintumor.jpg
 ├── brainsegapp.py
 ├── tumorseg.html
 └── ...
+```
 
-Then open `brainsegapp.py` and update this line to match your path:
+Then open `brainsegapp.py` and confirm this line:
 
+```python
 MODEL_PATH = "checkpoints/best_model.pth"
-
----
+```
 
 ### 5. Run the app
 
+```bash
 python brainsegapp.py
+```
 
-Then open your browser and go to:
-
-http://127.0.0.1:5000
-
----
+Open your browser at: **http://127.0.0.1:5000**
 
 ### Supported Scan Formats
-- `.jpg`, `.png` — standard brain scan images
-- `.nii`, `.nii.gz` — NIfTI format (real hospital MRI files)
 
-  ---
+| Format | Description |
+|---|---|
+| `.jpg`, `.png` | Standard brain scan images |
+| `.nii`, `.nii.gz` | NIfTI format — real hospital MRI files |
 
-## Key Objectives  
-- Implement a U-Net–based segmentation model for brain tumor detection  
-- Train and evaluate the model on BraTS MRI data  
-- Achieve reliable segmentation performance using Dice-based evaluation  
-- Build a robust, checkpoint-resumable training pipeline  
-- Demonstrate practical understanding of medical image preprocessing, augmentation, and evaluation  
+### Sample Test Scans
 
----
+Sample MRI images are included so you can test the app immediately without downloading any dataset:
 
-## Results  
-The trained model demonstrated strong segmentation performance on unseen test data:
+```
+Sample_MRI_Images/
+├── 00000534_brain_flair.nii
+└── braintumor.jpg
+```
 
-- **Test Dice Score:** 91.47% 
-- **Test Accuracy:** 99.58%  
-- **Test F1 Score:** 92.16%  
-- **Test Sensitivity (Recall):** 90.64%  
-- **Test Specificity:** 99.83%
+Simply upload either file in the web app to see segmentation in action.
 
-  ![Test Results](https://github.com/egwaojeangel/deep_learning_based_brain_tumor_segmentation_using_unet/blob/main/screenshots_on_tumor_seg/brain_segmentation_test_results.png)
+### Demo Video
 
-Checkpoints should be saved in a local `checkpoints/` folder:
-`checkpoints/best_model.pth`
+[![Watch the Demo](screenshots_on_tumor_seg/Upload_Scan.jpeg)](https://drive.google.com/file/d/1H175DdmRg-RpnKBPS9IlPN6SOq7HavQL/view?usp=drivesdk)
 
-These results indicate high overlap between predicted tumor regions and ground-truth masks, with excellent background classification and minimal false positives.
+Click the thumbnail above to watch the full system demo.
 
 ---
 
-## Dataset  
-This project uses the **BraTS 2021 (Brain Tumor Segmentation Challenge)** dataset, a widely adopted benchmark in medical imaging research.
+## Overview
 
-### Dataset Characteristics  
-- Multi-institutional MRI scans  
-- Expert-annotated tumor segmentation masks  
-- Multiple MRI modalities (FLAIR, T1, T1ce, T2)  
+Brain tumor segmentation plays a critical role in diagnosis, treatment planning, and disease monitoring. Manual delineation by radiologists is time-consuming and subject to inter-observer variability — making automated deep learning solutions both practical and impactful.
 
-### Modality Used in This Project  
-**FLAIR (Fluid-Attenuated Inversion Recovery)**  
-Chosen due to its strong contrast for highlighting tumor-associated edema.
-
-> ⚠️ **Note:**  
-> Due to size and licensing restrictions, the BraTS dataset is not included in this repository.
+This project goes beyond a standard model training exercise. It implements a complete end-to-end pipeline: from raw NIfTI MRI volumes through preprocessing, U-Net inference, and pixel-level segmentation — all deployed in a web application with a full patient records dashboard.
 
 ---
 
-## Data Preparation & Split  
-Patient-level split to prevent data leakage  
-- Training: 70%  
-- Validation: 15%  
-- Testing: 15%  
+## Dataset
 
-Only **2D slices containing tumor regions** were selected for training and evaluation, improving class balance and segmentation relevance.
+**BraTS 2021 (Brain Tumor Segmentation Challenge)** — a widely adopted benchmark in medical imaging research.
 
----
+| Property | Detail |
+|---|---|
+| Source | Multi-institutional MRI scans |
+| Annotations | Expert-annotated tumor segmentation masks |
+| Modalities | FLAIR, T1, T1ce, T2 |
+| Modality Used | FLAIR — chosen for its strong contrast of tumor-associated edema |
 
-## Methodology 
-### Image Preprocessing  
-- Slice extraction from 3D NIfTI volumes  
-- Min–max intensity normalization  
-- Resizing to **96 × 96 pixels**  
-- Binary mask generation (tumor vs. background)  
+### Data Split (Patient-level to prevent data leakage)
 
-Each MRI slice is treated as a **single-channel (grayscale)** input.
+| Split | Percentage |
+|---|---|
+| Training | 70% |
+| Validation | 15% |
+| Testing | 15% |
 
-### Data Augmentation (Training Only)  
-To improve generalization, the following augmentations were applied:
+Only 2D slices containing tumor regions were selected for training and evaluation, improving class balance and segmentation relevance.
 
-- Horizontal flipping  
-- Vertical flipping  
-- Random 90° rotations  
-
-Augmentations were applied consistently to both images and masks to preserve spatial alignment.
+> ⚠️ Due to size and licensing restrictions, the BraTS dataset is not included in this repository.
 
 ---
 
-## Model Architecture  
-### U-Net  
-The model is based on the original **U-Net architecture**, consisting of:
+## Methodology
 
-**Encoder (Contracting Path):**  
-- Stacked convolutional blocks  
-- Batch normalization  
-- ReLU activations  
-- Max-pooling for spatial downsampling  
+### Image Preprocessing
+- Slice extraction from 3D NIfTI volumes
+- Min-max intensity normalisation
+- Resizing to **96 × 96 pixels**
+- Binary mask generation (tumor vs. background)
+- Each slice treated as a single-channel (grayscale) input
 
-**Decoder (Expanding Path):**  
-- Bilinear upsampling  
-- Skip connections from encoder layers  
-- Feature concatenation for spatial detail recovery  
+### Data Augmentation (Training Only)
+- Horizontal flipping
+- Vertical flipping
+- Random 90° rotations
 
-**Output:**  
-- 1×1 convolution  
-- Sigmoid activation  
-- Binary segmentation mask (tumor / non-tumor)  
+Augmentations applied consistently to both images and masks to preserve spatial alignment.
 
 ---
 
-## Training Details  
-- **Framework:** PyTorch  
-- **Loss Function:** Binary Cross-Entropy (BCELoss)  
-- **Optimizer:** Adam  
-- **Learning Rate:** 1e-3  
-- **Batch Size:** 4  
-- **Epochs:** 10  
-- **Device:** CPU  
+## Model Architecture
 
-### Training Stability Techniques  
-- Gradient clipping (max norm = 1.0)  
-- Mid-epoch checkpoint saving  
-- Automatic resume from last checkpoint  
-- Best-model tracking based on validation Dice score  
+**U-Net** — a convolutional neural network specifically designed for biomedical image segmentation.
 
----
+**Encoder (Contracting Path)**
+- Stacked double convolutional blocks
+- Batch normalisation + ReLU activations
+- Max-pooling for spatial downsampling
 
-## Evaluation Metrics  
-The model was evaluated using standard segmentation metrics:
+**Decoder (Expanding Path)**
+- Bilinear upsampling
+- Skip connections from encoder layers
+- Feature concatenation for spatial detail recovery
 
-- Dice Coefficient (primary metric)  
-- Accuracy  
-- Precision  
-- Recall (Sensitivity)  
-- Specificity  
-- F1 Score  
-
-Dice score was prioritized due to its robustness for class-imbalanced segmentation tasks.
+**Output**
+- 1×1 convolution
+- Sigmoid activation
+- Binary segmentation mask (tumor / non-tumor)
 
 ---
 
-## Checkpointing & Reproducibility  
-The training pipeline includes:
+## Training Details
 
-- `latest_checkpoint.pth` – latest training state  
-- `best_model.pth` – best model based on validation Dice score  
+| Parameter | Value |
+|---|---|
+| Framework | PyTorch |
+| Loss Function | Binary Cross-Entropy (BCELoss) |
+| Optimizer | Adam |
+| Learning Rate | 1e-3 |
+| Batch Size | 4 |
+| Epochs | 10 |
+| Device | CPU |
+
+### Training Stability Techniques
+- Gradient clipping (max norm = 1.0)
+- Mid-epoch checkpoint saving
+- Automatic resume from last checkpoint
+- Best-model tracking based on validation Dice score
+
+### Checkpointing
+
+| File | Purpose |
+|---|---|
+| `latest_checkpoint.pth` | Latest training state — resume from here |
+| `best_model.pth` | Best model by validation Dice score |
 
 Training can be safely resumed after interruption without loss of progress.
 
 ---
 
-## Relation to Existing Research  
-U-Net–based architectures remain a dominant baseline for brain tumor segmentation tasks. Recent studies continue to demonstrate their effectiveness on BraTS datasets, particularly when combined with careful preprocessing and evaluation strategies (Isensee et al., 2021; Hatamizadeh et al., 2022; Zhang et al., 2023).
+## Web Application
 
-This project aligns with these works by implementing a clean, reproducible U-Net pipeline, serving as a strong baseline for future extensions.
+A Flask-based web application provides a full clinical support interface:
 
----
-
-## Limitations  
-- Uses 2D slice-based segmentation instead of full 3D volumes  
-- Single MRI modality (FLAIR only)  
-- No clinical validation or expert radiologist review  
-- No explainability or uncertainty estimation  
+- Upload MRI scans in standard or NIfTI format
+- Real-time tumor segmentation with red overlay highlighting
+- Estimated tumor size and location
+- Patient management dashboard — add, view, and manage patient records
+- Scan history stored per patient
 
 ---
 
-## Future Work  
-- Extend to 3D U-Net or nnU-Net  
-- Incorporate multi-modal MRI inputs  
-- Add Dice + Focal loss combinations  
-- Integrate explainability methods  
-- Deploy as a clinical decision support prototype  
-- Validate with expert radiologist annotations  
+## Relation to Existing Research
+
+U-Net architectures remain a dominant baseline for brain tumor segmentation. Recent studies continue to demonstrate their effectiveness on BraTS datasets when combined with careful preprocessing and evaluation (Isensee et al., 2021; Hatamizadeh et al., 2022; Zhang et al., 2023). This project implements a clean, reproducible U-Net pipeline serving as a strong baseline for future extensions.
 
 ---
 
-## Disclaimer  
-This project is intended **strictly for research and educational purposes**.  
-It is not a certified medical device and must not be used for clinical diagnosis or treatment decisions.
+## Limitations
+- 2D slice-based segmentation rather than full 3D volumetric analysis
+- Single MRI modality (FLAIR only)
+- No clinical validation or expert radiologist review
+- No explainability or uncertainty estimation
+- No external dataset validation
 
 ---
 
-## Sample Test Scans
-
-You can test the app immediately using these sample MRI scans 
-included in the repository:
-
-Sample_MRI_Images/
-├── 00000534_brain_flair.nii
-├── braintumor.jpg
-
-
-Simply upload any of these in the web app to see the 
-segmentation in action.
-
----
-### Demo Video (Click to Watch)
-Watch the brain tumor segmentation model in action:
-
-[![Watch the video](https://github.com/egwaojeangel/deep_learning_based_brain_tumor_segmentation_using_unet/blob/main/screenshots_on_tumor_seg/Upload_Scan.jpeg)](https://drive.google.com/file/d/1H175DdmRg-RpnKBPS9IlPN6SOq7HavQL/view?usp=drivesdk)
+## Future Work
+- Extend to 3D U-Net or nnU-Net for volumetric segmentation
+- Incorporate multi-modal MRI inputs (T1, T1ce, T2 + FLAIR)
+- Add Dice + Focal loss combinations
+- Integrate Grad-CAM explainability
+- Cloud deployment (Hugging Face Spaces / Render)
+- Validate with expert radiologist annotations
 
 ---
 
-## Author  
+## Disclaimer
+
+This project is intended **strictly for research and educational purposes**. It is not a certified medical device and must not be used for clinical diagnosis or treatment decisions. All outputs should be reviewed by qualified healthcare professionals.
+
+---
+
+## Author
+
 **Angel Egwaoje**
+Machine Learning Engineer | Computer Vision & Medical Imaging
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=flat-square&logo=linkedin)](https://www.linkedin.com/in/angel-egwaoje-416927280)
+[![GitHub](https://img.shields.io/badge/GitHub-Follow-black?style=flat-square&logo=github)](https://github.com/egwaojeangel)
 
