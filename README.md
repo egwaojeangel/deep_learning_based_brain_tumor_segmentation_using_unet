@@ -13,7 +13,7 @@ A deep learning system for automated **brain tumor segmentation** from MRI scans
 
 ---
 
-![TumorSeg Demo](https://drive.google.com/file/d/14X4dMJEqH4yosLI5BPV1qZAVlkj-Y6hd/view?usp=sharing)
+![TumorSeg Demo](https://drive.google.com/uc?export=view&id=14X4dMJEqH4yosLI5BPV1qZAVlkj-Y6hd)
 
 ---
 ## 📋 Table of Contents
