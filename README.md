@@ -12,7 +12,8 @@
 A deep learning system for automated **brain tumor segmentation** from MRI scans, achieving a **91.47% Dice Score** and **99.58% accuracy** using a U-Net architecture trained on the BraTS 2021 dataset. Deployed as a full web application with a built-in patient management dashboard supporting real hospital NIfTI file formats.
 
 ---
-
+![TumorSeg Demo](https://drive.google.com/file/d/14X4dMJEqH4yosLI5BPV1qZAVlkj-Y6hd/view?usp=sharing)
+---
 ## 📋 Table of Contents
 - [Results](#results)
 - [How to Run](#how-to-run)
